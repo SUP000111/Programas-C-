@@ -1,0 +1,19 @@
+#include <stdio.h>
+int main()
+{
+    int lados;
+    printf("Cuantos lados tiene tu figura? \n");
+    scanf("%d", &lados);
+    
+    if (lados==3){
+        printf("La figura es un triangulo \n");
+    }
+    
+    if (lados==4){
+        printf("La figura es un cuadrado \n");
+    }
+    
+    if (lados>=5){
+        printf("La figura es un poligono \n");
+    }
+}
