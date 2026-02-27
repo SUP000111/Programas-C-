@@ -1,0 +1,330 @@
+#include <iostream>
+#include <string>
+#include <thread>
+#include <chrono>
+
+using namespace std;
+
+int main() {
+
+    string nombreGuardado = "";
+    string contrasenaGuardada = "";
+    int opcion;
+
+    while (true) {
+
+        cout << "\n=============================" << endl;
+        cout << "            WTF              " << endl;
+        cout << "=============================" << endl;
+        cout << "1. Registrarse" << endl;
+        cout << "2. Iniciar Sesion" << endl;
+        cout << "3. Salir" << endl;
+        cout << "4. Explota Todo" << endl;
+        cout << "Seleccione una opcion: ";
+        cin >> opcion;
+        cin.ignore();
+
+        switch (opcion) {
+
+            case 2: {   // ===== INICIAR SESIÓN =====
+
+                if (nombreGuardado == "" || contrasenaGuardada == "") {
+                    cout << "\nNo hay usuario registrado.\n";
+                    break;
+                }
+
+                string nombre, contrasena;
+                int intentos = 0;
+
+                while (intentos < 3) {
+
+                    cout << "\nIngrese nombre: ";
+                    getline(cin, nombre);
+
+                    cout << "Ingrese contrasena: ";
+                    getline(cin, contrasena);
+
+                    if (nombre == nombreGuardado &&
+                        contrasena == contrasenaGuardada) {
+
+                        cout << "\nAcceso Correcto. Bienvenido "
+                             << nombre << "!\n";
+                        break;
+                    } else {
+                        intentos++;
+                        cout << "Datos incorrectos. Intento "
+                             << intentos << " de 3.\n";
+                    }
+                }
+
+                if (intentos == 3) {
+                    cout << "\nDemasiados intentos. El programa se cerrara.\n";
+                    this_thread::sleep_for(chrono::seconds(2));
+                    return 0;   // Cierra el programa automáticamente
+                }
+
+                break;
+            }
+
+            case 1: {   // ===== REGISTRO =====
+
+                cout << "\n=== REGISTRO ===\n";
+
+                cout << "Ingrese nuevo nombre: ";
+                getline(cin, nombreGuardado);
+
+                cout << "Ingrese nueva contrasena: ";
+                getline(cin, contrasenaGuardada);
+
+                cout << "\nRegistro exitoso.\n";
+
+                break;
+            }
+
+            case 3: {
+
+                cout << "\nGracias por usar el sistema.\n";
+                return 0;
+            }
+
+            case 4: {
+
+                cout << "\nEXPLOTA TODO\n";
+                cout << "Cerrando sistema en 3 segundos...\n";
+
+                this_thread::sleep_for(chrono::seconds(3));
+
+                cout << "Sistema cerrado.\n";
+                return 0;
+            }
+
+            default:
+                cout << "\nOpcion invalida. Intente de nuevo.\n";
+        }
+    }
+
+    return 0;
+}
+
+
+
+
+El código con mas seguridad:
+
+#include <iostream>
+#include <string>
+#include <thread>
+#include <chrono>
+
+using namespace std;
+
+int main() {
+
+    string nombreGuardado = "";
+    string contrasenaGuardada = "";
+    string opcion;  // Ahora es string para detectar la palabra secreta
+
+    while (true) {
+
+        cout << "\n=============================" << endl;
+        cout << "            WTF              " << endl;
+        cout << "=============================" << endl;
+        cout << "1. Iniciar Sesion" << endl;
+        cout << "2. Registrarse" << endl;
+        cout << "3. Salir" << endl;
+        cout << "Seleccione una opcion: ";
+
+        getline(cin, opcion);  // Ahora leemos texto completo
+
+        // ===== PALABRA SECRETA =====
+        if (opcion == "WTF") {
+            cout << "\n EXPLOTA TODO \n";
+            cout << "Cerrando sistema en 3 segundos...\n";
+
+            this_thread::sleep_for(chrono::seconds(3));
+
+            cout << "Sistema cerrado.\n";
+            return 0;
+        }
+
+        // Convertimos opciones normales
+        if (opcion == "1") {
+
+            if (nombreGuardado == "" || contrasenaGuardada == "") {
+                cout << "\nNo hay usuario registrado.\n";
+                continue;
+            }
+
+            string nombre, contrasena;
+            int intentos = 0;
+            bool acceso = false;
+
+            while (intentos < 3) {
+
+                cout << "\nIngrese nombre: ";
+                getline(cin, nombre);
+
+                cout << "Ingrese contrasena: ";
+                getline(cin, contrasena);
+
+                if (nombre == nombreGuardado &&
+                    contrasena == contrasenaGuardada) {
+
+                    cout << "\nAcceso Correcto. Bienvenido "
+                         << nombre << "!\n";
+                    acceso = true;
+                    break;
+                } else {
+                    intentos++;
+                    cout << "Datos incorrectos. Intento "
+                         << intentos << " de 3.\n";
+                }
+            }
+
+            if (!acceso) {
+                cout << "\nDemasiados intentos.\n";
+            }
+
+        } else if (opcion == "2") {
+
+            cout << "\n=== REGISTRO ===\n";
+
+            cout << "Ingrese nuevo nombre: ";
+            getline(cin, nombreGuardado);
+
+            cout << "Ingrese nueva contrasena: ";
+            getline(cin, contrasenaGuardada);
+
+            cout << "\nRegistro exitoso.\n";
+
+        } else if (opcion == "3") {
+
+            cout << "\nGracias por usar el sistema.\n";
+            return 0;
+
+        } else {
+
+            cout << "\nOpcion invalida.\n";
+        }
+    }
+
+    return 0;
+}
+
+
+
+
+El código con las instrucciones de los códigos:
+
+#include <iostream>   // Permite usar entrada y salida (cout, cin)
+#include <string>     // Permite usar el tipo de dato string
+#include <thread>     // Permite usar temporizadores (sleep_for)
+#include <chrono>     // Permite trabajar con tiempo (seconds)
+
+using namespace std;  // Evita escribir std:: antes de cout, cin, string, etc.
+
+int main() {   // Función principal donde inicia el programa
+
+    string nombreGuardado = "";        // Variable para guardar el nombre registrado
+    string contrasenaGuardada = "";    // Variable para guardar la contraseña registrada
+    int opcion;                        // Variable para guardar la opción del menú
+
+    while (true) {   // Ciclo infinito para que el menú se repita siempre
+
+        cout << "\n=============================" << endl;  // Línea decorativa
+        cout << "            WTF              " << endl;  // Título del menú
+        cout << "=============================" << endl;  // Línea decorativa
+        cout << "1. Registrarse" << endl;              // Opción 1
+        cout << "2. Iniciar Sesion" << endl;                 // Opción 2
+        cout << "3. Salir" << endl;                       // Opción 3
+        cout << "4. Explota Todo" << endl;                // Opción 4
+        cout << "Seleccione una opcion: ";
+        cin >> opcion;          // Lee la opción que escribe el usuario
+        cin.ignore();           // Limpia el buffer para evitar errores con getline
+
+        switch (opcion) {   // Evalúa qué opción eligió el usuario
+
+            case 2: {   // ===== INICIAR SESIÓN =====
+
+                if (nombreGuardado == "" || contrasenaGuardada == "") {
+                    // Verifica si no hay usuario registrado
+                    cout << "\nNo hay usuario registrado.\n";
+                    break;  // Regresa al menú
+                }
+
+                string nombre, contrasena;  // Variables temporales
+                int intentos = 0;           // Contador de intentos
+                bool acceso = false;        // Bandera para saber si entró correctamente
+
+                while (intentos < 3) {  // Permite máximo 3 intentos
+
+                    cout << "\nIngrese nombre: ";
+                    getline(cin, nombre);  // Lee nombre completo
+
+                    cout << "Ingrese contrasena: ";
+                    getline(cin, contrasena);  // Lee contraseña completa
+
+                    if (nombre == nombreGuardado && 
+                        contrasena == contrasenaGuardada) {
+                        // Compara datos ingresados con los guardados
+
+                        cout << "\nAcceso Correcto. Bienvenido "
+                             << nombre << "!\n";
+                        acceso = true;  // Marca acceso como correcto
+                        break;          // Sale del ciclo
+                    } else {
+                        intentos++;  // Aumenta número de intentos
+                        cout << "Datos incorrectos. Intento "
+                             << intentos << " de 3.\n";
+                    }
+                }
+
+                if (!acceso) {  // Si no logró entrar
+                    cout << "\nDemasiados intentos.\n";
+                }
+
+                break;  // Sale del case 1
+            }
+
+            case 1: {   // ===== REGISTRO =====
+
+                cout << "\n=== REGISTRO ===\n";
+
+                cout << "Ingrese nuevo nombre: ";
+                getline(cin, nombreGuardado);  
+                // Guarda el nombre en la variable principal
+
+                cout << "Ingrese nueva contrasena: ";
+                getline(cin, contrasenaGuardada);
+                // Guarda la contraseña en la variable principal
+
+                cout << "\nRegistro exitoso.\n";
+
+                break;  // Regresa al menú
+            }
+
+            case 3: {   // ===== SALIR =====
+
+                cout << "\nGracias por usar el sistema.\n";
+                return 0;  // Termina el programa completamente
+            }
+
+            case 4: {   // ===== EXPLOTA TODO =====
+
+                cout << "\nEXPLOTA TODO\n";  
+                cout << "Cerrando sistema en 3 segundos...\n";
+
+                this_thread::sleep_for(chrono::seconds(3));
+                // Pausa el programa 3 segundos
+
+                cout << "Sistema cerrado.\n";
+                return 0;  // Cierra el programa
+            }
+
+            default:   // Si el usuario escribe algo inválido
+                cout << "\nOpcion invalida. Intente de nuevo.\n";
+        }
+    }
+
+    return 0;  // Final del programa (aunque nunca llega aquí por el while true)
+}
