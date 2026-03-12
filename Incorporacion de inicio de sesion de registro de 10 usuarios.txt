@@ -1,0 +1,123 @@
+#include <iostream>
+#include <string>
+#include <thread>
+#include <chrono>
+
+using namespace std;
+
+int main() {
+
+    const int MAX_USUARIOS = 10;
+
+    string nombres[MAX_USUARIOS];
+    string contrasenas[MAX_USUARIOS];
+    int totalUsuarios = 0;
+
+    string opcion;
+
+    while (true) {
+
+        cout << "\n=============================" << endl;
+        cout << "            WTF              " << endl;
+        cout << "=============================" << endl;
+        cout << "1. Iniciar Sesion" << endl;
+        cout << "2. Registrarse" << endl;
+        cout << "3. Salir" << endl;
+        cout << "Seleccione una opcion: ";
+
+        getline(cin, opcion);
+
+        // ===== PALABRA SECRETA =====
+        if (opcion == "WTF") {
+
+            cout << "\n EXPLOTA TODO \n";
+            cout << "Cerrando sistema en 3 segundos...\n";
+
+            this_thread::sleep_for(chrono::seconds(3));
+
+            cout << "Sistema cerrado.\n";
+            return 0;
+        }
+
+        // ===== LOGIN =====
+        if (opcion == "1") {
+
+            if (totalUsuarios == 0) {
+                cout << "\nNo hay usuarios registrados.\n";
+                continue;
+            }
+
+            string nombre, contrasena;
+            int intentos = 0;
+            bool acceso = false;
+
+            while (intentos < 3) {
+
+                cout << "\nIngrese nombre: ";
+                getline(cin, nombre);
+
+                cout << "Ingrese contrasena: ";
+                getline(cin, contrasena);
+
+                for (int i = 0; i < totalUsuarios; i++) {
+
+                    if (nombre == nombres[i] &&
+                        contrasena == contrasenas[i]) {
+
+                        cout << "\nAcceso Correcto. Bienvenido "
+                             << nombre << "!\n";
+
+                        acceso = true;
+                        break;
+                    }
+                }
+
+                if (acceso) break;
+
+                intentos++;
+                cout << "Datos incorrectos. Intento "
+                     << intentos << " de 3.\n";
+            }
+
+            if (!acceso) {
+                cout << "\nDemasiados intentos.\n";
+            }
+
+        }
+
+        // ===== REGISTRO =====
+        else if (opcion == "2") {
+
+            if (totalUsuarios >= MAX_USUARIOS) {
+                cout << "\nNo se pueden registrar mas usuarios.\n";
+                continue;
+            }
+
+            cout << "\n=== REGISTRO ===\n";
+
+            cout << "Ingrese nuevo nombre: ";
+            getline(cin, nombres[totalUsuarios]);
+
+            cout << "Ingrese nueva contrasena: ";
+            getline(cin, contrasenas[totalUsuarios]);
+
+            totalUsuarios++;
+
+            cout << "\nRegistro exitoso.\n";
+        }
+
+        // ===== SALIR =====
+        else if (opcion == "3") {
+
+            cout << "\nGracias por usar el sistema.\n";
+            return 0;
+        }
+
+        else {
+
+            cout << "\nOpcion invalida.\n";
+        }
+    }
+
+    return 0;
+}
